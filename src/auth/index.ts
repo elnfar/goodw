@@ -12,8 +12,8 @@ const authOptions: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '743864739366-cb0ihkrlb7c8c3q9vmi9jj4sbkrhhljh.apps.googleusercontent.com',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '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',
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: { params: { access_type: "offline", prompt: "consent" } },
       allowDangerousEmailAccountLinking:true
     }),
@@ -84,7 +84,7 @@ const authOptions: NextAuthConfig = {
     },
   },
   basePath: BASE_PATH,
-  secret: process.env.NEXTAUTH_SECRET || '1231233241234',
+  secret: process.env.NEXTAUTH_SECRET,
   debug: true,
 };
 
