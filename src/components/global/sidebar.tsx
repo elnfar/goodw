@@ -11,8 +11,14 @@ import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
 SidebarClose
 import Image from "next/image";
 import { SidebarToggle } from "./sidebar-toggle";
+import { User } from "next-auth";
+import { SignOut } from "../sign-out";
+import { SignIn } from "../sign-in";
 
-export function Sidebar() {
+export function Sidebar({session}:any) {
+
+
+  // {/* 
   const sidebar = useStore(useSidebarToggle, (state) => state);
   
   if(!sidebar) return null;
@@ -20,7 +26,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed top-0 left-0 z-[9999999] bg-white h-screen -translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300",
+        "fixed top-0 left-0 z-[9999999] bg-[rgb(23,23,23)] h-screen -translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300",
         sidebar?.isOpen === false ? "w-[90px]" : "w-72"
       )}
     >
@@ -48,6 +54,7 @@ export function Sidebar() {
             </h1>
           </Link>
         </Button>
+        {/* {!session ? <SignIn/> : <SignOut/>}  */}
         <Menu isOpen={sidebar?.isOpen} />
       </div>
     </aside>

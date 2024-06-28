@@ -17,6 +17,12 @@ enum Role {
   VIEWER
 }
 
+enum IssueCategory {
+  NEW
+  IN_PROGRESS
+  DONE
+}
+
 model Tenant {
   id               String   @id @default(uuid())
   name             String?
@@ -26,6 +32,9 @@ model Tenant {
   expirationDate   DateTime? // NULL -> means no expiration
   inviteKey        String     @unique @default(dbgenerated("replace(cast(gen_random_uuid() as text), '-', '')")) @db.Text
   users            User[]
+  projects         Project[]
+  issues Issue[]
+
 }
 
 model User {
@@ -40,6 +49,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   newsletter Newsletter[]
+  assignedIssues IssueAssignment[]
   tenantId   String
   tenant     Tenant     @relation(fields: [tenantId], references: [id])
 }
@@ -118,4 +128,39 @@ model Subscribers {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
+}
+
+
+
+model Project {
+  id          String        @id @default(uuid())
+  name       String
+  description String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  tenantId   String
+  tenant     Tenant     @relation(fields: [tenantId], references: [id])
+  issues      Issue[]
+}
+model Issue {
+  id          String        @id @default(uuid())
+  title       String
+  description String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  category    IssueCategory @default(NEW)
+  projectId   String?
+  project     Project?       @relation(fields: [projectId], references: [id])
+  tenantId   String
+  tenant     Tenant     @relation(fields: [tenantId], references: [id])
+  assignees   IssueAssignment[]
+}
+
+model IssueAssignment {
+  issueId String
+  userId  String
+  issue   Issue @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([issueId, userId])
 }

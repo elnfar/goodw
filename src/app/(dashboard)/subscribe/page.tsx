@@ -1,18 +1,52 @@
-import React from 'react'
-import Component from './component'
-import { PrismaClient } from '@prisma/client'
-import { currentUser } from '@clerk/nextjs/server';
+'use client';
 
+import React, { useState } from 'react';
 
-const prismaClient = new PrismaClient();
+interface Todo {
+  title: string;
+  status: boolean;
+}
 
-export default async function page() {
+export default function Page() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todoName, setTodoName] = useState('');
+  const [status, setStatus] = useState(false); // Changed to boolean type
 
-    const userClerk = await currentUser();
-    
-    
-    
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setTodos([...todos, {
+      title:todoName,
+      status:status
+    }])
+
+  };
+
+  console.log(todos);
+
   return (
-    <Component />
-  )
+    <div>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          value={todoName}
+          onChange={(e) => setTodoName(e.target.value)}
+          placeholder='Todo name'
+        />
+
+        <label htmlFor="status">Todo status</label>
+        <select
+          name="status"
+          id="status"
+          value={status.toString()} // Convert boolean status to string for select value
+          onChange={(e) => setStatus(e.target.value === 'true')}
+        >
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
+
+        <button type="submit">Add Todo</button>
+      </form>
+    </div>
+  );
 }

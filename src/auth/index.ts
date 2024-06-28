@@ -6,6 +6,16 @@ import { cookies } from "next/headers";
 
 const prisma = new PrismaClient();
 
+type UserSession = {
+  name: string;
+  email: string;
+  image: string | null;
+  id: string;
+  tenant: {
+    id: string;
+  };
+};
+
 export const BASE_PATH = "/api/auth";
 
 const authOptions: NextAuthConfig = {
@@ -43,7 +53,9 @@ const authOptions: NextAuthConfig = {
               }
             }
           : {
-              create: {}
+              create: {
+                name:profile.name + '"s team'
+              }
             }
 
         // },
@@ -74,11 +86,14 @@ const authOptions: NextAuthConfig = {
       }
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token }:{
+      session:any,
+      token:any
+    }) {
 
       //@ts-ignore
       session.user.id = token.id;
-      //@ts-ignore
+
       session.user.tenant = token.tenant
       return session;
     },
