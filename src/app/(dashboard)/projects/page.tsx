@@ -8,6 +8,7 @@ import { revalidatePath } from 'next/cache'
 
 import ProjectSingle from './_components/project-single'
 import { prismaClient as prisma } from '@/lib/prisma'
+import ProjectNavbar from './_components/project-nav'
 
 export default async function page() {
 
@@ -26,9 +27,6 @@ export default async function page() {
 
   return (
     <div>
-
-      <ProjectDialog/>
-
 
       <div className='py-10'>
         {projects.map((project) => <ProjectSingle key={project.id} project={project}/>)}

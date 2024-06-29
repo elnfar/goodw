@@ -2,17 +2,19 @@
 
 import React, { Dispatch, SetStateAction, useState, DragEvent } from "react";
 import { motion } from "framer-motion";
-import {Issue, IssueCategory, User} from '@prisma/client'
+import {Issue, IssueCategory, Project, User} from '@prisma/client'
 import updateIssue from "@/app/_actions/updateIssue";
-import { IssueDialog } from "@/app/(dashboard)/projects/_components/create-issue-dialog";
+import Link from "next/link";
+import ProjectNavbar from "@/app/(dashboard)/projects/_components/project-nav";
 
 
-export const CustomKanban = ({ issues,projectId, users }: { issues: Issue[],projectId:string, users:User[] }) => {
+
+export const CustomKanban = ({ issues,projectId, users, projects }: { issues: Issue[],projectId:string, users:User[], projects:Project | null }) => {
 
 
   return (
     <div className="h-screen w-full text-neutral-50">
-      <IssueDialog projectId={projectId} users={users}/>
+      <ProjectNavbar projectId={projectId} users={users} issues={issues} projects={projects}/>
       <Board issues={issues} />
     </div>
   );
@@ -177,7 +179,7 @@ const Column = ({ title, headingColor, cards, column, setCards }: ColumnProps) =
   const filteredCards = cards.filter((c) => c.category === column);
 
   return (
-    <div className="w-56 shrink-0">
+    <div className="w-[35%]  shrink-0 px-4 border-[rgb(95,95,95)] border-r-[1px]">
       <div className="mb-3 flex items-center justify-between">
         <h3 className={`font-medium ${headingColor}`}>{title}</h3>
         <span className="rounded text-sm text-neutral-400">
@@ -207,18 +209,18 @@ type CardProps = Issue & {
 
 const Card = ({ title, id, category, handleDragStart }: CardProps) => {
   return (
-    <>
+    <Link href={`/issues/${id}`}>
       <DropIndicator beforeId={id} column={category} />
       <motion.div
         layout
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { title, id, category })}
-        className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
+        className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 py-7 active:cursor-grabbing"
       >
         <p className="text-sm text-neutral-100">{title}</p>
       </motion.div>
-    </>
+    </Link>
   );
 };
 

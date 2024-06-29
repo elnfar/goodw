@@ -1,5 +1,4 @@
 import createIssue from "@/app/_actions/createIssue"
-import createProject from "@/app/_actions/createProject"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
