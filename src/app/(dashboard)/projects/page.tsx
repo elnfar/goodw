@@ -1,14 +1,13 @@
-import { Button } from '@/components/ui/button'
-import React from 'react'
-import { ProjectDialog } from './_components/dialog'
+
 
 
 import { auth } from '@/auth'
-import { revalidatePath } from 'next/cache'
 
 import ProjectSingle from './_components/project-single'
 import { prismaClient as prisma } from '@/lib/prisma'
 import ProjectNavbar from './_components/project-nav'
+import ProjectModal from '@/components/global/modal'
+import { ProjectDialog } from './_components/dialog'
 
 export default async function page() {
 
@@ -23,14 +22,23 @@ export default async function page() {
     }
   })
   
+  console.log(projects,'PR');
+  
 
 
   return (
     <div>
+        {/* <ProjectNavbar /> */}
 
+        <ProjectModal
+        title='Example Modal'
+        projects={projects}
+        body={<ProjectDialog/>}
+      />  
       <div className='py-10'>
         {projects.map((project) => <ProjectSingle key={project.id} project={project}/>)}
       </div>
+
 
     </div>
   )

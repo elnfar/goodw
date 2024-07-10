@@ -148,7 +148,7 @@ model Subscribers {
 
 
 model Project {
-  id          String        @id @default(uuid())
+  id          String        @id @default(uuid()) 
   name       String
   description String?
   createdAt  DateTime   @default(now())
@@ -157,7 +157,7 @@ model Project {
   tenant     Tenant     @relation(fields: [tenantId], references: [id])
   issues      Issue[]
 }
-model Issue {
+model Issue {x
   id          String        @id @default(uuid())
   title       String
   description String?

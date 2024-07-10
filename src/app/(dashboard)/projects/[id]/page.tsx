@@ -1,7 +1,6 @@
 
 import { CustomKanban } from '@/components/global/dnd';
 import { prismaClient as prisma } from '@/lib/prisma'
-import { IssueDialog } from '../_components/create-issue-dialog';
 import { auth } from '@/auth';
 import ProjectNavbar from '../_components/project-nav';
 
@@ -41,7 +40,7 @@ export default async function page({params}:{
 
   return (
     <div>
-        {/* <ProjectNavbar/> */}
+        {/* <ProjectNavbar issues={issues} projects={projects}/> */}
         <CustomKanban issues={issues} projectId={params.id} users={users} projects={projects}/>
     </div>
   )

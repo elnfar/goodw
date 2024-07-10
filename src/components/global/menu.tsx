@@ -15,12 +15,22 @@ import {
   TooltipContent,
   TooltipProvider
 } from "@/components/ui/tooltip";
+import { Session } from "next-auth";
+import { Idle } from "@prisma/client";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { UserAvatar } from "./Avatar";
 
 interface MenuProps {
   isOpen: boolean | undefined;
+  idle: Idle,
+  session:Session
 }
 
-export function Menu({ isOpen }: MenuProps) {
+export function Menu({ isOpen, idle, session }: MenuProps) {
   const pathname = usePathname();
   const menuList = getMenuList(pathname);
 
@@ -103,10 +113,20 @@ export function Menu({ isOpen }: MenuProps) {
               )}
             </li>
           ))}
+
+
           <li className="w-full grow flex items-end">
             <TooltipProvider disableHoverableContent>
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
+                  <div className="">
+                    {!!session.user && (
+                  <Link href='/account' className="rounded-full w-10 h-10 mx-auto flex items-center justify-center border-2">
+                    <UserAvatar
+                    src={session.user?.image || ''}
+                    />
+                  </Link>
+                  )}
                   <Button
                     onClick={() => {}}
                     variant="outline"
@@ -124,6 +144,7 @@ export function Menu({ isOpen }: MenuProps) {
                       Sign out
                     </p>
                   </Button>
+                  </div>
                 </TooltipTrigger>
                 {isOpen === false && (
                   <TooltipContent side="right">Sign out</TooltipContent>
@@ -136,3 +157,7 @@ export function Menu({ isOpen }: MenuProps) {
     </ScrollArea>
   );
 }
+
+
+
+

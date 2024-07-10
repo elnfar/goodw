@@ -8,14 +8,23 @@ import { useStore } from "zustand";
 import { Button } from "@/components/ui/button";
 import { Menu } from "@/components/global/menu"; 
 import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
-SidebarClose
 import Image from "next/image";
 import { SidebarToggle } from "./sidebar-toggle";
-import { User } from "next-auth";
+import { Session, User } from "next-auth";
 import { SignOut } from "../sign-out";
 import { SignIn } from "../sign-in";
+import { Activity, Idle } from "@prisma/client";
 
-export function Sidebar({session}:any) {
+
+type IdleType = {
+  idle:Idle
+}
+
+export function Sidebar({session, idle}:{
+  session:Session,
+  idle: Idle
+}) {
+
 
 
   // {/* 
@@ -54,8 +63,10 @@ export function Sidebar({session}:any) {
             </h1>
           </Link>
         </Button>
+        {/* <div className="w-24 h-24 bg-slate-300 p-4 rounded-full">
+        </div>  */}
         {/* {!session ? <SignIn/> : <SignOut/>}  */}
-        <Menu isOpen={sidebar?.isOpen} />
+        <Menu isOpen={sidebar?.isOpen} idle={idle} session={session}/>
       </div>
     </aside>
   );

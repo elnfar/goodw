@@ -1,13 +1,19 @@
-FROM node:18-alpine AS base
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
+FROM node:18-alpine
 
+WORKDIR /app
 
-WORKDIR /skl-2
+COPY package*.json ./
 
-COPY package.json ./
+RUN npm install pnpm -g
 
 RUN pnpm update && pnpm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD pnpm dev
+
 
 # If you want yarn update and  install uncomment the bellow script
 
