@@ -2,6 +2,7 @@ import getUser from '@/app/_actions/onUser';
 import { auth } from '@/auth';
 import { signOut } from '@/auth/helper';
 import ProjectModal from '@/components/global/modal';
+import { MultiStepLoaderDemo } from '@/components/global/multi-step-loader';
 import { SignIn } from '@/components/sign-in';
 import { SignOut } from '@/components/sign-out';
 import useProjectModal from '@/hooks/useProjectModal';
@@ -54,7 +55,6 @@ export default async function page() {
   return (
     <main className=''>
 
-
     <div className=' max-w-6xl mx-auto'>
 
 
@@ -68,10 +68,10 @@ export default async function page() {
         <div>
           <p className='text-4xl'>Current team name: {team?.name}</p>
 
-          <p>
+          <div>
           Team members:
-           <span className=' block font-bold'>{team?.users.map((item) => <p key={item.id}>{item.name}</p>)}</span>
-          </p>
+           <p className=' block font-bold'>{team?.users.map((item) => <span key={item.id}>{item.name}</span>)}</p>
+          </div>
         </div>
 
       </div>

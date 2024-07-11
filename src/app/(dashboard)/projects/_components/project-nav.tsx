@@ -11,7 +11,9 @@ export default function ProjectNavbar({ issues, projectId, users, projects }: { 
   const { onOpen, isOpen } = useProjectModal(); // Access onOpen from Zustand store
 
   
-  if(!projects) onOpen();
+  if(!projects) {
+    return () => onOpen();
+  }
 
   console.log(isOpen);
   

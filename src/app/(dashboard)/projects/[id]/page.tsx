@@ -4,6 +4,7 @@ import { prismaClient as prisma } from '@/lib/prisma'
 import { auth } from '@/auth';
 import ProjectNavbar from '../_components/project-nav';
 
+
 export default async function page({params}:{
     params: {
         id:string
@@ -36,7 +37,9 @@ export default async function page({params}:{
   })
 
 
-    
+    if(!projects) {
+      return "No project found"
+    }
 
   return (
     <div>
