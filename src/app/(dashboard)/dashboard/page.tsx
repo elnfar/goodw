@@ -41,41 +41,48 @@ export default async function page() {
       id: (session.user as UserSession).tenant.id,
     },
     include:{
-      users:true
-    }
+      users:true,
+      issues:true,
+      projects:true
+    },
   })
 
-  
+
+  const DONE = team?.issues.map((item) => item.category === "DONE")
+
+
 
   const greeting = greetUser({name: session.user?.name});
   
 
+  const stats = [
+    { name: 'Issues', value: team?.issues.length },
+    { name: 'Issues Done', value: DONE?.length, },
+    { name: 'Number of servers', value: '3' },
+    { name: 'Success rate', value: '98.5%' },
+  ]
+  
 
 
   return (
     <main className=''>
 
-    <div className=' max-w-6xl mx-auto'>
 
 
-
-      <div>{greeting}</div>
-
-      {/* <SignOut/> */}
-      <p className='text-2xl underline'>Signed in user {session?.user?.email}</p>
-      
-
-        <div>
-          <p className='text-4xl'>Current team name: {team?.name}</p>
-
-          <div>
-          Team members:
-           <p className=' block font-bold'>{team?.users.map((item) => <span key={item.id}>{item.name}</span>)}</p>
-          </div>
+    <div className="py-12">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.name} className="px-4 py-6 sm:px-6 lg:px-8 bg-zinc-800">
+              <p className="text-sm font-medium leading-6 text-gray-400">{stat.name}</p>
+              <p className="mt-2 flex items-baseline gap-x-2">
+                <span className="text-4xl font-semibold tracking-tight text-white">{stat.value}</span>
+              </p>
+            </div>
+          ))}
         </div>
-
       </div>
-
+    </div>
     </main>
   );
 }

@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaClient } from '@prisma/client';
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -67,6 +68,7 @@ const authOptions: NextAuthConfig = {
       })
       cookies().delete('invite_key')
       return true
+
     },
     async jwt({ token, user, account, profile }) {
       console.log({ token, account, profile, user })
@@ -97,7 +99,12 @@ const authOptions: NextAuthConfig = {
       session.user.tenant = token.tenant
       return session;
     },
+
+    async redirect({ url, baseUrl }) {
+      return baseUrl + '/onboarding';
+    },
   },
+
   basePath: BASE_PATH,
   secret: process.env.NEXTAUTH_SECRET,
   debug: true,

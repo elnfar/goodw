@@ -17,8 +17,8 @@ export default async function createProject(data: FormData) {
 
 
     const validatedFields = ProjectSchema.safeParse({
-      name:data.get('title') as string,
-      description:data.get('description') as string
+      name:data.get('name') as string,
+      industry:data.get('industry') as string
     })
 
 
@@ -30,14 +30,22 @@ export default async function createProject(data: FormData) {
 
     
 
-    const project = await prisma.project.create({
-      data: {
-        //@ts-ignore
-        tenantId: user?.user?.tenant.id,
-        name:validatedFields.data.name,
-        description:validatedFields.data.description
-      }
-    })
+    try {
+      const project = await prisma.project.create({
+        data: {
+          //@ts-ignore
+          tenantId: user?.user?.tenant.id,
+          name:validatedFields.data.name,
+          industry:validatedFields.data.industry
+        }
+        
+
+      })  
+      
+    revalidatePath(`/projects`);
+    }catch(err) {
+      return err;
+    }
     
-    revalidatePath(`/`)
+    
   }

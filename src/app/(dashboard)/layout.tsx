@@ -1,11 +1,11 @@
 import { auth } from '@/auth'
-import ProjectModal from '@/components/global/modal';
 import { Sidebar } from '@/components/global/sidebar'
 import { SignIn } from '@/components/sign-in';
 import { SignOut } from '@/components/sign-out';
 import { prismaClient } from '@/lib/prisma';
 import React, { ReactNode } from 'react'
-import { ProjectDialog } from './projects/_components/dialog';
+import { CardWithForm } from './projects/_components/dialog';
+import Modal from '@/components/global/modal';
 
 
 
@@ -48,13 +48,12 @@ export default async function DashboardLayout({children}:{
         </div>
         
           <div className='h-screen w-full px-4'>
-            {/* <div className=' flex justify-end'>{!session ? <SignIn/> : <SignOut/>} </div>  */}
-            <ProjectModal
-                  title='Example Modal'
-                  projects={projects}
-                  body={<ProjectDialog/>}
-
-            />  
+            <Modal
+            title='New project'
+            disabled
+            projects={projects}
+            body={<CardWithForm/>}
+            />
             {children}
           </div>
       </div>

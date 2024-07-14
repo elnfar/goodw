@@ -150,10 +150,10 @@ model Subscribers {
 model Project {
   id          String        @id @default(uuid()) 
   name       String
-  description String?
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   tenantId   String
+  industry String
   tenant     Tenant     @relation(fields: [tenantId], references: [id])
   issues      Issue[]
 }

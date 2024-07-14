@@ -12,7 +12,7 @@ export default function ProjectSingle({project}:{
         </div>
 
         <div>
-            {project.description}
+            {project.industry}
         </div>
     </Link>
   )
