@@ -25,7 +25,10 @@ export default async function page() {
 
 
   if(projects.length === 0) return (
+    <div>
+      <ButtonClient title='create'/>
      <p className='p-4 text-white text-2xl'>No project found</p>
+     </div>
   )
 
   
@@ -33,7 +36,6 @@ export default async function page() {
 
   return (
     <div>
-      <ButtonClient title='Create'/>
       <div className='py-10'>
         {projects.map((project) => <ProjectSingle key={project.id} project={project}/>)}
       </div>
