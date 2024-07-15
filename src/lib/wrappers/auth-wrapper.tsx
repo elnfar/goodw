@@ -11,7 +11,7 @@ export default async function AuthenticationWrapper({children}:{
     const sessionUser = await auth();
 
     if(!sessionUser) {
-        redirect('http://localhost:3000/api/auth/signin')
+        redirect('https://goodw.vercel.app/api/auth/signin')
     }
 
     const usr = await prismaClient.user.findUnique({
@@ -27,10 +27,10 @@ export default async function AuthenticationWrapper({children}:{
         }
     })
 
-    if(projects.length > 0)  redirect('/dashboard');
+    if(projects.length > 0)  redirect('https://goodw.vercel.app/dashboard');
 
     if(usr?.role !== "OWNER") {
-        redirect('/dashboard');
+        redirect('https://goodw.vercel.app/onboarding');
     }
     
 
