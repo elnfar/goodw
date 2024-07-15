@@ -6,6 +6,7 @@ import { prismaClient } from '@/lib/prisma';
 import React, { ReactNode } from 'react'
 import { CardWithForm } from './projects/_components/dialog';
 import Modal from '@/components/global/modal';
+import AuthenticationWrapper from '@/lib/wrappers/auth-wrapper';
 
 
 
@@ -41,6 +42,7 @@ export default async function DashboardLayout({children}:{
 
 
   return (
+    <AuthenticationWrapper>
     <div className=' bg-[rgb(25,25,25)]'>
       <div className='flex justify-between'>
         <div className='overflow-y-scroll h-screen w-24'>
@@ -58,5 +60,6 @@ export default async function DashboardLayout({children}:{
           </div>
       </div>
     </div>
+    </AuthenticationWrapper>
   )
 }

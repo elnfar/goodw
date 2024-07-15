@@ -10,6 +10,10 @@ export default async function AuthenticationWrapper({children}:{
 
     const sessionUser = await auth();
 
+    if(!sessionUser) {
+        redirect('http://localhost:3000/api/auth/signin')
+    }
+
     const usr = await prismaClient.user.findUnique({
         where:{
             id:sessionUser?.user?.id
@@ -29,6 +33,7 @@ export default async function AuthenticationWrapper({children}:{
         redirect('/dashboard');
     }
     
+
 
 
   return <>{children}</>
