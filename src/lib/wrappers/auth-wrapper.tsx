@@ -27,9 +27,9 @@ export default async function AuthenticationWrapper({children}:{
         }
     })
 
-    if(projects.length > 0)  redirect('https://goodw.vercel.app/dashboard');
+    // if(projects.length > 0)  redirect('https://goodw.vercel.app/dashboard');
 
-    if(usr?.role !== "OWNER") {
+    if(usr!.role === "OWNER") {
         redirect('https://goodw.vercel.app/onboarding');
     }
     

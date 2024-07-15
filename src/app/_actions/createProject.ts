@@ -46,6 +46,4 @@ export default async function createProject(data: FormData) {
     }catch(err) {
       return err;
     }
-    
-    
   }
