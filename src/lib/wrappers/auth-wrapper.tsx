@@ -8,7 +8,10 @@ export default async function AuthenticationWrapper({children}:{
 }) {
 
     const sessionUser = await auth();
-    const environment = process.env.NODE_ENV
+    const environment = process.env.NEXT_PUBLIC_URL
+
+    console.log(environment);
+    
 
     if(!sessionUser) {
         redirect(`${environment}/api/auth/signin`)
