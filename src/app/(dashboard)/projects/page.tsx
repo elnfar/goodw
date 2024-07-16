@@ -12,11 +12,14 @@ export default async function page() {
 
   const session = await auth()
 
+  console.log(session?.expires);
+  
+
   
   const projects = await prisma.project.findMany({
     where: {
       //@ts-ignore
-      tenantId: session?.user?.tenantId
+      tenantId: session?.user?.tenant.id
     }
   })
   
@@ -25,9 +28,9 @@ export default async function page() {
 
 
   if(projects.length === 0) return (
-    <div>
+    <div className='px-8 py-12 space-y-4'> 
+      <p className=' text-white text-2xl'>No project found</p>
       <ButtonClient title='create'/>
-     <p className='p-4 text-white text-2xl'>No project found</p>
      </div>
   )
 

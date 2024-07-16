@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from 'next/font/google'
+import Providers from "@/components/providers/progress-provider";
 
 
 
@@ -31,7 +32,7 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body className={`${inter.className} min-h-screen w-full  bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
 

@@ -3,6 +3,7 @@ import { auth } from '@/auth';
 import { signOut } from '@/auth/helper';
 import ProjectModal from '@/components/global/modal';
 import { MultiStepLoaderDemo } from '@/components/global/multi-step-loader';
+import { DashboardTabs } from '@/components/global/tabs';
 import { SignIn } from '@/components/sign-in';
 import { SignOut } from '@/components/sign-out';
 import useProjectModal from '@/hooks/useProjectModal';
@@ -61,6 +62,21 @@ export default async function page() {
     { name: 'Number of servers', value: '3' },
     { name: 'Success rate', value: '98.5%' },
   ]
+
+  const values = [
+    {
+      name: 'Pending',
+      value: 'pending',
+      content:<PendingContent/>
+
+    },
+    {
+      name: 'Completed',
+      value: 'completed',
+      content:<CompletedContent/>
+    },
+    
+  ]
   
 
 
@@ -70,7 +86,7 @@ export default async function page() {
 
 
     <div className="py-12">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl space-y-5">
         <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.name} className="px-4 py-6 sm:px-6 lg:px-8 bg-zinc-800">
@@ -81,8 +97,20 @@ export default async function page() {
             </div>
           ))}
         </div>
+
+        <DashboardTabs
+            tabCardTitle='Assigned to you'
+            tabCardDescription='Issues assigned to you that are pending will show up here.'
+            values={values}
+            defaultValue='pending'
+        />
       </div>
+      
     </div>
+
+
+   
+
     </main>
   );
 }
@@ -105,3 +133,17 @@ function greetUser({name}:{
 
 }
 
+
+function PendingContent() {
+  return (
+    <div>Pending content</div>
+  )
+}
+
+
+
+function CompletedContent() {
+  return (
+    <div>Completed content</div>
+  )
+}
