@@ -1,4 +1,4 @@
-import {  Calendar, CalendarHeartIcon, ChefHatIcon, Folder, HelpCircle, Layout, LayoutDashboardIcon, LayoutGrid, LucideLayoutDashboard, MailIcon, Monitor, MonitorCheckIcon, PlayCircle, Settings, SquarePen, StarIcon, Timer, TimerIcon, TvIcon, Users, VideoIcon } from "lucide-react";
+import {  AlignVerticalJustifyCenterIcon,  LayoutGrid,  SatelliteIcon,  Settings, SquarePen, StarIcon, Timer, TimerIcon, TvIcon, User, Users, VideoIcon } from "lucide-react";
 
 
 type Submenu = {
@@ -42,42 +42,31 @@ export function getMenuList(pathname: string): Group[] {
         groupLabel: "Manage",
         menus: [
           {
-            href: "",
-            label: "Media",
-            active: pathname.includes("/media"),
+            href: "/projects",
+            label: "Projects",
+            active: pathname.includes("/projects"),
             icon: SquarePen,
-            submenus: [
-              {
-                href: "/media",
-                label: "Images",
-                active: pathname === "/media"
-              },
-              {
-                href: "/media",
-                label: "Videos",
-                active: pathname === "/media"
-              }
-            ]
+            submenus:[],
           },
           {
-            href: "/playlists",
-            label: "Playlists",
-            active: pathname.includes("/playlists"),
-            icon: VideoIcon,
+            href: "/issues",
+            label: "My issues",
+            active: pathname.includes("/issues"),
+            icon: SatelliteIcon,
             submenus: []
           },
           {
-            href: "/schedules",
-            label: "Schedules",
-            active: pathname.includes("/schedules"),
+            href: "/activity",
+            label: "Activity",
+            active: pathname.includes("/activity"),
             icon: Timer,
             submenus: []
           },
           {
-            href: "/monitors",
-            label: "Monitors",
-            active: pathname.includes("/monitors"),
-            icon: MonitorCheckIcon,
+            href: "/team",
+            label: "Team",
+            active: pathname.includes("/team"),
+            icon: AlignVerticalJustifyCenterIcon,
             submenus: []
           }
         ]
@@ -86,16 +75,16 @@ export function getMenuList(pathname: string): Group[] {
         groupLabel: "Settings",
         menus: [
           {
-            href: "/users",
-            label: "Users",
-            active: pathname.includes("/users"),
-            icon: Users,
-            submenus: []
-          },
-          {
             href: "/account",
             label: "Account",
             active: pathname.includes("/account"),
+            icon: User,
+            submenus: []
+          },
+          {
+            href: "/preferences",
+            label: "Preferences",
+            active: pathname.includes("/preferences"),
             icon: Settings,
             submenus: []
           }
