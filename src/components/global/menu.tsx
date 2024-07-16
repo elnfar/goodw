@@ -23,6 +23,8 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { UserAvatar } from "./Avatar";
+import { signOut } from "@/auth/helper";
+import { SignOut } from "../sign-out";
 
 interface MenuProps {
   isOpen: boolean | undefined;
@@ -128,7 +130,7 @@ export function Menu({ isOpen, idle, session }: MenuProps) {
                   </Link>
                   )}
                   <Button
-                    onClick={() => {}}
+                    onClick={() => signOut()}
                     variant="outline"
                     className="w-full justify-center h-10 mt-5"
                   >

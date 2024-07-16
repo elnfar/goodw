@@ -22,44 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { redirect, useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
-
-// export function ProjectDialog() {
-
-
-//   return (
-//     // <Form {...form}>
-//     <div className="bg-white p-4 rounded-md">
-//       <div className="sm:max-w-[525px]">
-
-//         <div>
-//           <h1>Add your project here</h1>
-//           <p>
-//             You can add your projects in order, no worries, you will have option to edit your project later.
-//           </p>
-//         </div>
-//         <form className=" flex flex-col gap-4" action={createProject}>
-//           <div className="">
-//             <Input id="title" name="title" placeholder="New project" className="col-span-3" />
-//           </div>
-//           <div className="">
-//             <textarea id="description" name="description" placeholder="Project description" className=" w-full p-4 border focus-within:normal-case active:normal-case" rows={12} cols={48}/>
-//           </div>
-//           <div>
-//             <Button type="submit" variant="secondary" className="bg-zinc-800 text-white">Create</Button>
-//             {/* <MultiStepLoader loadingStates={loadingStates} loading /> */}
-//           </div>
-//         </form>
-
-//       </div>
-//     </div>
-//     // </Form>
-//   )
-// }
-
-
-
+import { useRouter } from "next/navigation";
 
 
 
@@ -73,8 +36,6 @@ export function CardWithForm() {
   async function onCreate(data:FormData) {
 
     await createProject(data);
-
-    router.push("/projects")
     router.refresh();
     onClose();
   }

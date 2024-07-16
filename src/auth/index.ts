@@ -3,19 +3,9 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaClient } from '@prisma/client';
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
-type UserSession = {
-  name: string;
-  email: string;
-  image: string | null;
-  id: string;
-  tenant: {
-    id: string;
-  };
-};
 
 export const BASE_PATH = "/api/auth";
 
@@ -98,10 +88,6 @@ const authOptions: NextAuthConfig = {
 
       session.user.tenant = token.tenant
       return session;
-    },
-
-    async redirect({ url, baseUrl }) {
-      return baseUrl + '/onboarding';
     },
   },
 

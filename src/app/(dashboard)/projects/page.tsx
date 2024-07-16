@@ -40,6 +40,7 @@ export default async function page() {
   return (
     <div>
       <div className='py-10'>
+      <ButtonClient title='create'/>
         {projects.map((project) => <ProjectSingle key={project.id} project={project}/>)}
       </div>
     </div>

@@ -7,11 +7,11 @@ export default async function AuthenticationWrapper({children}:{
     children:ReactNode
 }) {
 
-
     const sessionUser = await auth();
+    const environment = process.env.NODE_ENV
 
     if(!sessionUser) {
-        redirect('https://goodw.vercel.app/api/auth/signin')
+        redirect(`${environment}/api/auth/signin`)
     }
 
     const usr = await prismaClient.user.findUnique({
