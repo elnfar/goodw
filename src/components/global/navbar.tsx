@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className='fixed z-50 text-white w-full p-5'>
       <div className='flex justify-between items-center w-full'>
         <div className='flex items-center gap-x-12'>
-           <h1 className='text-2xl'>Eskeleton</h1>
+           <h1 className='text-2xl font-bold underline'>Aiiz</h1>
         </div>  
 
         <div>
