@@ -1,12 +1,5 @@
-import getUser from '@/app/_actions/onUser';
 import { auth } from '@/auth';
-import { signOut } from '@/auth/helper';
-import ProjectModal from '@/components/global/modal';
-import { MultiStepLoaderDemo } from '@/components/global/multi-step-loader';
 import { DashboardTabs } from '@/components/global/tabs';
-import { SignIn } from '@/components/sign-in';
-import { SignOut } from '@/components/sign-out';
-import useProjectModal from '@/hooks/useProjectModal';
 import { PrismaClient } from '@prisma/client'
 import { withAccelerate } from '@prisma/extension-accelerate'
 const prisma = new PrismaClient().$extends(withAccelerate())

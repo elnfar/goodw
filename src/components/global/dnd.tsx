@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import {Issue, IssueCategory, Project, User} from '@prisma/client'
 import updateIssue from "@/app/_actions/updateIssue";
 import Link from "next/link";
-import ProjectNavbar from "@/app/(dashboard)/projects/_components/project-nav";
+import ProjectNavbar from "@/app/[workplaceSlug]/(dashboard)/projects/_components/project-nav";
 
 
 

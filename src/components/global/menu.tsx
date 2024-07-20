@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { Ellipsis, LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
-
 import { cn } from "@/lib/utils";
-import { getMenuList } from "@/data"; 
+import { getMenuList } from "@/data";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CollapseMenuButton } from "./collapse-menu";
@@ -17,24 +16,19 @@ import {
 } from "@/components/ui/tooltip";
 import { Session } from "next-auth";
 import { Idle } from "@prisma/client";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
 import { UserAvatar } from "./Avatar";
 import { signOut } from "@/auth/helper";
-import { SignOut } from "../sign-out";
 
 interface MenuProps {
   isOpen: boolean | undefined;
-  idle: Idle,
-  session:Session
+  idle: Idle;
+  session: Session;
+  workplaceSlug: string;
 }
 
-export function Menu({ isOpen, idle, session }: MenuProps) {
+export function Menu({ workplaceSlug, isOpen, idle, session }: MenuProps) {
   const pathname = usePathname();
-  const menuList = getMenuList(pathname);
+  const menuList = getMenuList(pathname, workplaceSlug);
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block text-[rgb(95,95,95)]">
@@ -116,36 +110,35 @@ export function Menu({ isOpen, idle, session }: MenuProps) {
             </li>
           ))}
 
-
           <li className="w-full grow flex items-end">
             <TooltipProvider disableHoverableContent>
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
                   <div className="">
                     {!!session.user && (
-                  <Link href='/account' className="rounded-full w-10 h-10 mx-auto flex items-center justify-center border-2">
-                    <UserAvatar
-                    src={session.user?.image || ''}
-                    />
-                  </Link>
-                  )}
-                  <Button
-                    onClick={() => signOut()}
-                    variant="outline"
-                    className="w-full justify-center h-10 mt-5"
-                  >
-                    <span className={cn(isOpen === false ? "" : "mr-4")}>
-                      <LogOut size={18} />
-                    </span>
-                    <p
-                      className={cn(
-                        "whitespace-nowrap",
-                        isOpen === false ? "opacity-0 hidden" : "opacity-100"
-                      )}
+                      <Link href={`/${workplaceSlug}/(dashboard)/account`} className="rounded-full w-10 h-10 mx-auto flex items-center justify-center border-2">
+                        <UserAvatar
+                          src={session.user?.image || ''}
+                        />
+                      </Link>
+                    )}
+                    <Button
+                      onClick={() => signOut()}
+                      variant="outline"
+                      className="w-full justify-center h-10 mt-5"
                     >
-                      Sign out
-                    </p>
-                  </Button>
+                      <span className={cn(isOpen === false ? "" : "mr-4")}>
+                        <LogOut size={18} />
+                      </span>
+                      <p
+                        className={cn(
+                          "whitespace-nowrap",
+                          isOpen === false ? "opacity-0 hidden" : "opacity-100"
+                        )}
+                      >
+                        Sign out
+                      </p>
+                    </Button>
                   </div>
                 </TooltipTrigger>
                 {isOpen === false && (
@@ -159,7 +152,3 @@ export function Menu({ isOpen, idle, session }: MenuProps) {
     </ScrollArea>
   );
 }
-
-
-
-

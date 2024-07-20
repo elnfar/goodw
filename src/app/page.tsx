@@ -1,16 +1,15 @@
 import Featured from "@/components/global/featured";
 import Navbar from "@/components/global/navbar";
-import { WaitList } from "@/components/ui/hero-waitlist";
+import { WaitList } from "./hero-waitlist";
 
 
 
-export default async function Home() {
 
+export default function page() {
   return (
     <main className="min-h-screen">
-
       <Navbar/>
-      <WaitList/>
+      <WaitList />
       <Featured/>
     </main>
   );

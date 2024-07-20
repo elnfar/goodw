@@ -3,6 +3,7 @@ import React from 'react'
 import { Button } from '../ui/button'
 
 export default function Navbar() {
+  
   return (
     <nav className='fixed z-50 text-white w-full p-5'>
       <div className='flex justify-between items-center w-full'>
@@ -12,7 +13,7 @@ export default function Navbar() {
 
         <div>
           <Button asChild variant="outline" className='rounded-full'>
-            <Link href="/dashboard">Get started</Link>
+              <a target="_blank" href={`https://app.siizz.xyz`}>Get started</a>
           </Button>
         </div>
       </div>

@@ -20,15 +20,20 @@ type IdleType = {
   idle:Idle
 }
 
-export function Sidebar({session, idle}:{
+export function Sidebar({session, idle,workplaceSlug}:{
   session:Session,
-  idle: Idle
+  idle: Idle,
+  workplaceSlug:string
 }) {
 
 
 
   // {/* 
   const sidebar = useStore(useSidebarToggle, (state) => state);
+
+  if(workplaceSlug) {
+    
+  }
   
   if(!sidebar) return null;
 
@@ -66,7 +71,7 @@ export function Sidebar({session, idle}:{
         {/* <div className="w-24 h-24 bg-slate-300 p-4 rounded-full">
         </div>  */}
         {/* {!session ? <SignIn/> : <SignOut/>}  */}
-        <Menu isOpen={sidebar?.isOpen} idle={idle} session={session}/>
+        <Menu workplaceSlug={workplaceSlug} isOpen={sidebar?.isOpen} idle={idle} session={session}/>
       </div>
     </aside>
   );

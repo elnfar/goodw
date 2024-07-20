@@ -17,9 +17,12 @@ export default async function AuthenticationWrapper({children}:{
         redirect(`${environment}/api/auth/signin`)
     }
 
-    const usr = await prismaClient.user.findUnique({
+    const user = await prismaClient.user.findUnique({
         where:{
-            id:sessionUser?.user?.id
+            id:sessionUser?.user?.id,
+        },
+        include:{
+            tenant:true
         }
     })
 
@@ -30,13 +33,24 @@ export default async function AuthenticationWrapper({children}:{
         }
     })
 
+    if(user?.isOnboarded === false) {
+        redirect(`${environment}/onboarding`)
+    }
+
+
+
+    // if(user?.isOnboarded) {
+    //     redirect(`${environment}/${user.tenant.name}/dashboard`)
+    // } 
+
+
+    
     // if(projects.length > 0)  redirect('https://goodw.vercel.app/dashboard');
 
     // if(usr!.role === "OWNER") {
     //     redirect('https://goodw.vercel.app/onboarding');
     // }
     
-
 
 
   return <>{children}</>

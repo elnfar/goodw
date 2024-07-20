@@ -1,9 +1,18 @@
-import Link from "next/link";
-import { BackgroundBeams } from "./background-bims";
-import { Button } from "./button";
-import { Spotlight } from "./spotlight";
 
-export function WaitList() {
+
+import Link from "next/link";
+import { Button } from "../components/ui/button";
+import { Spotlight } from "../components/ui/spotlight";
+
+
+
+export function WaitList(
+) {
+  
+
+  const environment = process.env.NODE_ENV;
+  
+
   return (
     <div className="relative isolate overflow-hidden bg-black ">
 
@@ -61,7 +70,7 @@ export function WaitList() {
       </p>
       
       <div className=" flex items-center justify-center pt-4 gap-x-4">
-        <Button asChild variant="outline" className="text-white border-gray-700"><Link href='/dashboard'>Get started</Link></Button>
+        <Button asChild variant="outline" className="text-white border-gray-700"><a target="_blank" href={`https://app.siizz.xyz`}>Get started</a></Button>
         <Button asChild variant="outline" className="text-white border-gray-700"><Link href='/about/onboarding'>How it works</Link></Button>
       </div>
     </div>

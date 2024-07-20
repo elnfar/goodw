@@ -1,7 +1,6 @@
 import { auth } from '@/auth'
 import { Sidebar } from '@/components/global/sidebar'
-import { SignIn } from '@/components/sign-in';
-import { SignOut } from '@/components/sign-out';
+
 import { prismaClient } from '@/lib/prisma';
 import React, { ReactNode } from 'react'
 import { CardWithForm } from './projects/_components/dialog';
@@ -10,9 +9,15 @@ import AuthenticationWrapper from '@/lib/wrappers/auth-wrapper';
 
 
 
-export default async function DashboardLayout({children}:{
-    children:ReactNode
+
+export default async function DashboardLayout({children, params}:{
+    children:ReactNode,
+    params: { workplaceSlug: string };
 }) {
+
+  const { workplaceSlug } = params
+
+
 
 
   const session = await auth();
@@ -34,10 +39,7 @@ export default async function DashboardLayout({children}:{
   }
  })
 
-  
 
-
- console.log(projects, "sss");
  
 
 
@@ -46,7 +48,7 @@ export default async function DashboardLayout({children}:{
     <div className=' bg-[rgb(25,25,25)]'>
       <div className='flex justify-between'>
         <div className='overflow-y-scroll h-screen w-24'>
-          <Sidebar session={session!} idle={userIdleActivity?.idle!}/>
+          <Sidebar workplaceSlug={workplaceSlug} session={session!} idle={userIdleActivity?.idle!}/>
         </div>
         
           <div className='h-screen w-full px-4'>
@@ -63,3 +65,5 @@ export default async function DashboardLayout({children}:{
     </AuthenticationWrapper>
   )
 }
+
+

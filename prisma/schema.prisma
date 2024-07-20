@@ -43,7 +43,7 @@ model Tenant {
   users            User[]
   projects         Project[]
   issues Issue[]
-
+  teamSize Int @default(0)
   activity Activity[]
 
 }
@@ -63,7 +63,7 @@ model User {
   assignedIssues IssueAssignment[]
   tenantId   String
   tenant     Tenant     @relation(fields: [tenantId], references: [id])
-
+  isOnboarded Boolean @default(false)
 
   activity Activity[]
 
