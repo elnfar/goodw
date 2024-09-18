@@ -1,16 +1,17 @@
 import { create } from 'zustand'
 
 
-interface ProjectModal {
+interface Modal {
     isOpen:boolean;
     onOpen:() => void;
     onClose:() => void;
 }
 
-const useProjectModal = create<ProjectModal>((set) => ({
+const useModal = create<Modal>((set) => ({
   isOpen:false,
+  onToggle:() => set((state) => ({isOpen:!state.isOpen})),
   onOpen:() => set({isOpen:true}),
   onClose:() => set({isOpen:false})
 }))
 
-export default useProjectModal
+export default useModal;

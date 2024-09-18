@@ -55,7 +55,6 @@ export default async function DashboardLayout({children, params}:{
             <Modal
             title='New project'
             disabled
-            projects={projects}
             body={<CardWithForm/>}
             />
             {children}
